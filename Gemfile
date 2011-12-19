@@ -12,3 +12,8 @@ group :test do
   gem 'webrat'
   gem 'spork', '~> 0.9.0.rc'
 end
+
+group :production do
+  # gems specifically for Heroku go here
+  gem 'pg'
+end
