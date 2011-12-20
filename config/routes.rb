@@ -1,10 +1,8 @@
 Hnh::Application.routes.draw do
-  get "pages/home"
-
-  get "pages/contact"
+  match '/contact', :to =>   'pages#contact'
+  match '/about',   :to =>   'pages#about'
+  root :to => 'pages#home'  
   
-  get "pages/about"
-
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
