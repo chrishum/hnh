@@ -1,6 +1,10 @@
 Hnh::Application.routes.draw do
-  match '/contact', :to =>   'pages#contact'
-  match '/about',   :to =>   'pages#about'
+  get "users/new"
+  
+  match '/register', :to => 'users#new'
+
+  match '/contact',  :to => 'pages#contact'
+  match '/about',    :to => 'pages#about'
   root :to => 'pages#home'  
   
   # The priority is based upon order of creation:

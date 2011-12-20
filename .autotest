@@ -6,4 +6,3 @@ Autotest.add_hook :initialize do |autotest|
     autotest.files_matching(/^spec\/requests\/.*_spec\.rb$/)
   end
 end
-    
