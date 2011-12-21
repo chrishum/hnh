@@ -10,6 +10,7 @@ development:
   encoding: utf8
   database: hnh_development
   pool: 5
+  username: hnh
   password: dmbfan
 #  timeout: 5000
 
@@ -23,6 +24,7 @@ test:
   encoding: utf8
   database: hnh_test
   pool: 5
+  username: hnh
   password: dmbfan
 #  timeout: 5000
 
@@ -33,5 +35,6 @@ production:
   encoding: utf8
   database: hnh_production
   pool: 5
+  username: hnh
   password: dmbfan
 #  timeout: 5000
