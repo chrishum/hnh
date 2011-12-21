@@ -20,3 +20,7 @@ group :production do
   # gems specifically for Heroku go here
   # gem 'pg'
 end
+
+group :assets do
+  gem 'uglifier'
+end
