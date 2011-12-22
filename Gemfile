@@ -4,6 +4,7 @@ gem 'rails', '3.1.3'
 gem 'pg'
 gem 'thin'
 gem 'jquery-rails'
+gem 'haml'
 
 group :development do
   gem 'rspec-rails'
