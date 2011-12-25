@@ -2,3 +2,22 @@
   Place all the styles related to the matching controller here.
   They will automatically be included in application.css.
 */
+
+/* User show page */
+
+table.profile {
+	width: 100%;
+	margin-bottom: 0;
+}
+
+td.main {
+	width: 70%;
+	padding: 1em;
+}
+
+td.sidebar {
+	width: 30%;
+	padding: 1em;
+	vertical-align: top;
+	background: 995;
+}
