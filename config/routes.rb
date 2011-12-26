@@ -1,5 +1,8 @@
 Hnh::Application.routes.draw do
+
+
   resources :users
+  resources :perps
   resources :sessions, :only => [:new, :create, :destroy]
   
   match '/register', :to => 'users#new'

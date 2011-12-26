@@ -1,0 +1,17 @@
+%h1 Create a New Perp
+= form_for(@perp) do |f|
+  /= render 'shared/error_messages'
+  .field
+    = f.label :first_name
+    %br/
+    = f.text_field :first_name
+  .field
+    = f.label :last_name
+    %br/
+    = f.text_field :last_name
+  .field
+    = f.label :party
+    %br/
+    = f.text_field :party
+  .actions
+    = f.submit "Create"
