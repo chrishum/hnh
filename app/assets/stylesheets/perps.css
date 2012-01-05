@@ -2,3 +2,13 @@
   Place all the styles related to the matching controller here.
   They will automatically be included in application.css.
 */
+
+/* Perps index page */
+
+ul.perps {
+	margin-top: 1em;
+}
+
+.perps li {
+	list-style: none;
+}

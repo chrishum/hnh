@@ -48,6 +48,8 @@ GEM
     factory_girl_rails (1.4.0)
       factory_girl (~> 2.3.0)
       railties (>= 3.0.0)
+    faker (1.0.1)
+      i18n (~> 0.4)
     haml (3.1.4)
     hike (1.2.1)
     i18n (0.6.0)
@@ -129,6 +131,7 @@ GEM
       nokogiri (>= 1.2.0)
       rack (>= 1.0)
       rack-test (>= 0.5.3)
+    will_paginate (3.0.2)
 
 PLATFORMS
   ruby
@@ -136,6 +139,7 @@ PLATFORMS
 DEPENDENCIES
   annotate!
   factory_girl_rails
+  faker
   haml
   jquery-rails
   pg
@@ -146,3 +150,4 @@ DEPENDENCIES
   thin
   uglifier
   webrat
+  will_paginate

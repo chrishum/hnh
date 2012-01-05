@@ -10,3 +10,7 @@ Factory.define :perp do |perp|
   perp.last_name             "Perp"
   perp.party                 "Independent"
 end
+
+Factory.sequence :last_name do |n|
+  "Perp #{n}"
+end
