@@ -6,11 +6,12 @@ gem 'thin'
 gem 'jquery-rails'
 gem 'haml'
 gem 'will_paginate'
+gem 'faker'
 
 group :development do
   gem 'rspec-rails'
   gem 'annotate', :git => 'git://github.com/ctran/annotate_models.git'
-  gem 'faker'
+  # gem 'faker'
 end
 
 group :test do
