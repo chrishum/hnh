@@ -1,0 +1,64 @@
+/*
+  Place all the styles related to the matching controller here.
+  They will automatically be included in application.css.
+*/
+
+h1.statement {
+	margin-bottom: 0.3em;
+}
+
+table.statements {
+	margin-top: 1em;
+}
+
+table.statements tr {
+	height: 70px;
+}
+
+table.statements tr td {
+	border-top: 1px solid #ccc;
+	vertical-align: top;
+	padding-top: 10px;
+}
+
+table.statements tr td.statement span.content {
+	
+	font-size: 120%;
+	font-weight: bold;;
+}
+
+table.statements tr td.statement span.perp {
+	display: block;
+	font-size: 85%;
+	font-style: italic;
+}
+
+table.statements tr td.details span.timestamp {
+	display: block;
+	font-size: 85%;
+	color: #666;
+	text-align: right;
+}
+
+table.statements tr td.details span.delete {
+	display: block;
+	font-size: 50%;
+	color: #666;
+	text-align: right;
+}
+
+table.statements tr td.details span.delete a {
+	text-decoration: none;
+	color: #666;
+}
+
+/* New Statement form */
+
+form.new_statement {
+	margin-bottom: 2em;
+}
+
+form.new_statement textarea {
+	height: 4em;
+	margin-bottom: 0;
+}

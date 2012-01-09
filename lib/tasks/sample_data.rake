@@ -10,13 +10,22 @@ namespace :db do
                  :password_confirmation => "poochie")
     admin.toggle!(:admin)
     
+    Party.create!(:name => "Republican",  :three_letter => "Rep", :one_letter => "R")
+    Party.create!(:name => "Democrat",    :three_letter => "Dem", :one_letter => "D")
+    Party.create!(:name => "Independent", :three_letter => "Ind", :one_letter => "I")
+    
     99.times do |n|
       first_name = Faker::Name.first_name
       last_name  = Faker::Name.last_name
-      party      = Faker::Lorem.words(1)
-      Perp.create!(:first_name => first_name, 
-                   :last_name  => last_name, 
-                   :party      => party)
+      party      = Party.find_by_id(1 + Random.rand(3))
+      party.perps.create!(:first_name => first_name, 
+                   :last_name  => last_name)
+    end
+    
+    Perp.all(:limit => 6).each do |perp|
+      50.times do
+        perp.statements.create!(:content => Faker::Company.catch_phrase)
+      end
     end
   end
 end

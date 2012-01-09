@@ -1,0 +1,8 @@
+%h1 Party: #{@party.name}
+%br/
+= pluralize(@party.perps.count, "perp")
+
+- unless @party.perps.empty?
+  %table.perps{ :summary => "Party perps" }
+    = render @perps
+  = will_paginate @perps

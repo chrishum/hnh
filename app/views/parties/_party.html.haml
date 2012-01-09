@@ -1,0 +1,5 @@
+%li
+  = link_to party.name + " (" + pluralize(party.perps.count, "perp") + ")", party
+  - if current_user && current_user.admin?
+    = " | " 
+    = link_to "delete", party, :method => :delete, :confirm => "You sure?", :title => "Delete #{party.name}"

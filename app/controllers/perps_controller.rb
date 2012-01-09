@@ -10,6 +10,7 @@ class PerpsController < ApplicationController
   
   def show
     @perp = Perp.find(params[:id])
+    @statements = @perp.statements.paginate(:page => params[:page], :per_page => 10)
     @title = @perp.first_name + " " + @perp.last_name
   end
   
@@ -19,7 +20,8 @@ class PerpsController < ApplicationController
   end
   
   def create
-    @perp = Perp.new(params[:perp])
+    @party = Party.find_by_id(params[:party])
+    @perp = @party.perps.build(params[:perp])
     if @perp.save
       redirect_to @perp
     else
@@ -35,6 +37,10 @@ class PerpsController < ApplicationController
   
   def update
     @perp = Perp.find(params[:id])
+    if params[:party]
+      @perp.party = Party.find_by_id(params[:party])
+      @perp.save
+    end
     if @perp.update_attributes(params[:perp])
       flash[:success] = "Perp updated."
       redirect_to @perp
@@ -48,15 +54,5 @@ class PerpsController < ApplicationController
     Perp.find(params[:id]).destroy
     flash[:success] = "Perp destroyed."
     redirect_to perps_path
-  end
-
-private
-
-  def authenticate
-    deny_access unless signed_in?
-  end
-  
-  def admin_user
-    redirect_to(root_path) unless current_user.admin?
   end
 end

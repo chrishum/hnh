@@ -12,3 +12,22 @@ ul.perps {
 .perps li {
 	list-style: none;
 }
+
+/* Perps show page */
+
+div.perp_info img {
+	padding-right: 0.1em;
+}
+
+div.perp_info a {
+	text-decoration: none;
+}
+
+div.perp_info span.perp_name {
+	position: absolute;
+}
+
+div.perp_info span.statements {
+	font-size: 80%;
+}
+

@@ -1,0 +1,5 @@
+%h1 Edit Party
+= form_for(@party) do |f|
+  = render 'fields', :f => f
+  .actions
+    = f.submit "Update"

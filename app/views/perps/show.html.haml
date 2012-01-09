@@ -1,2 +1,9 @@
 %h1 #{@perp.first_name} #{@perp.last_name}
-= @perp.party
+= @perp.party.name
+%br/
+= pluralize(@perp.statements.count, "statement")
+
+- unless @perp.statements.empty?
+  %table.statements{ :summary => "User statements" }
+    = render @statements
+  = will_paginate @statements

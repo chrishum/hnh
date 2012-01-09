@@ -5,12 +5,27 @@ Factory.define :user do |user|
   user.password_confirmation "foobar"
 end
 
+Factory.define :party do |party|
+  party.name                 { Factory.next(:name) }
+  party.three_letter         "Ind"
+  party.one_letter           "I"
+end
+
 Factory.define :perp do |perp|
   perp.first_name            "Example"
   perp.last_name             "Perp"
-  perp.party                 "Independent"
+  perp.association :party
 end
 
 Factory.sequence :last_name do |n|
   "Perp #{n}"
+end
+
+Factory.sequence :name do |n|
+  "Party #{n}"
+end
+
+Factory.define :statement do |statement|
+  statement.content "Foo bar"
+  statement.association :perp
 end

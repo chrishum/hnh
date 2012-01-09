@@ -1,0 +1,16 @@
+%tr
+  %td.statement
+    %span.content= "\"" + statement.content + "\""
+    %br/
+    %span.perp 
+      #{statement.perp.first_name} #{statement.perp.last_name}
+      = surround " (", ")" do
+        = statement.perp.party.name
+  %td.details
+    %span.timestamp Posted #{time_ago_in_words(statement.created_at)} ago.
+    - if current_user && current_user.admin?
+      %span.delete
+        = surround "(", ")" do
+          = link_to "delete", statement, :method => :delete, 
+                                         :confirm => "You sure?", 
+                                         :title => "Delete #{statement.perp}: #{statement.content}"
