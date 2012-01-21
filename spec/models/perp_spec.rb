@@ -14,6 +14,18 @@ describe Perp do
     @party.perps.create!(@attr)
   end
   
+  describe "attributes" do
+
+    before(:each) do
+      @perp = @party.perps.create!(@attr)
+    end
+    
+    it "should have the correct full_name" do
+      @perp.should respond_to(:full_name)
+      @perp.full_name.should == "#{@perp.first_name} #{@perp.last_name}"
+    end
+  end    
+  
   describe "validations" do
 
     it "should require a first name" do
@@ -70,11 +82,27 @@ describe Perp do
   describe "party association" do
     
     before(:each) do
-      @perp = Perp.create(@attr)
+      @party = Factory(:party)
+      @perp = @party.perps.create(@attr)
     end
     
     it "should have a party attribute" do
       @perp.should respond_to(:party)
+    end
+    
+    it "should have the correct party_name attribute" do
+      @perp.should respond_to(:party_name)
+      @perp.party_name.should == @party.name
+    end
+    
+    it "should have the correct party_three_letter attribute" do
+      @perp.should respond_to(:party_three_letter)
+      @perp.party_three_letter.should == @party.three_letter
+    end
+    
+    it "should have the correct party_one_letter attribute" do
+      @perp.should respond_to(:party_one_letter)
+      @perp.party_one_letter.should == @party.one_letter
     end
   end
 end

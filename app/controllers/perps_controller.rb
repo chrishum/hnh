@@ -1,7 +1,7 @@
 class PerpsController < ApplicationController
   
-  before_filter :authenticate, :only => [:edit, :update, :destroy]
-  before_filter :admin_user,   :only => :destroy
+  before_filter :require_user,  :only => [:edit, :update, :destroy]
+  before_filter :require_admin, :only => :destroy
   
   def index
     @title = "Perps"
@@ -11,7 +11,7 @@ class PerpsController < ApplicationController
   def show
     @perp = Perp.find(params[:id])
     @statements = @perp.statements.paginate(:page => params[:page], :per_page => 10)
-    @title = @perp.first_name + " " + @perp.last_name
+    @title = @perp.full_name
   end
   
   def new

@@ -1,14 +1,14 @@
 Hnh::Application.routes.draw do
 
-  resources :users
-  resources :perps
-  resources :statements
+  resources :users, :user_sessions
+  resources :perps do
+    resources :statements
+  end
   resources :parties
-  resources :sessions, :only => [:new, :create, :destroy]
   
   match '/register', :to => 'users#new'
-  match '/signin',   :to => 'sessions#new'
-  match '/signout',  :to => 'sessions#destroy'
+  match '/signin',   :to => 'user_sessions#new'
+  match '/signout',  :to => 'user_sessions#destroy'
   match '/contact',  :to => 'pages#contact'
   match '/about',    :to => 'pages#about'
   root :to => 'pages#home'  

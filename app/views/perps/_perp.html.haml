@@ -1,5 +1,6 @@
 %li
-  %span.name= link_to "#{perp.first_name} #{perp.last_name} (#{perp.party.three_letter}, #{pluralize(perp.statements.count, "statement")})", perp
-  - if current_user && current_user.admin?
-    = " | " 
-    = link_to "delete", perp, :method => :delete, :confirm => "You sure?", :title => "Delete #{perp.first_name} #{perp.last_name}"
+  %span.name
+    = link_to "#{perp.first_name} #{perp.last_name}", perp
+    = surround "(", ")" do
+      #{perp.party_three_letter}, #{pluralize(perp.statements.count, "statement")}
+  = delete_link perp, "You sure?", "Delete #{perp.first_name} #{perp.last_name}", " | "

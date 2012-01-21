@@ -1,5 +1,5 @@
 %h1 #{@perp.first_name} #{@perp.last_name}
-= @perp.party.name
+= @perp.party_name
 %br/
 = pluralize(@perp.statements.count, "statement")
 

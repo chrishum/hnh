@@ -13,4 +13,12 @@ module ApplicationHelper
       "#{base_title} | #{@title}"
     end
   end
+  
+  # Return a delete link only if user is an admin
+  def delete_link(target, confirm, title, divider)
+    if current_user && current_user.admin?
+      @link = divider + link_to("delete", target, :method => :delete, :confirm => confirm, :title => title)
+      @link.html_safe
+    end
+  end
 end

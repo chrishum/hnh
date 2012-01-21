@@ -1,8 +1,9 @@
 Factory.define :user do |user|
-  user.name                  "Chris Humphreys"
+  user.handle                "Chris Humphreys"
   user.email                 "chris.h@mail.com"
   user.password              "foobar"
   user.password_confirmation "foobar"
+  user.skip_session_maintenance true
 end
 
 Factory.define :party do |party|

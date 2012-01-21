@@ -11,7 +11,18 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120106230813) do
+ActiveRecord::Schema.define(:version => 20120109172931) do
+
+  create_table "offices", :force => true do |t|
+    t.string   "title"
+    t.string   "state"
+    t.integer  "party_id"
+    t.date     "start_date"
+    t.date     "end_date"
+    t.integer  "perp_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "parties", :force => true do |t|
     t.string   "name"
@@ -26,9 +37,9 @@ ActiveRecord::Schema.define(:version => 20120106230813) do
   create_table "perps", :force => true do |t|
     t.string   "first_name"
     t.string   "last_name"
+    t.integer  "party_id"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "party_id"
   end
 
   add_index "perps", ["party_id"], :name => "index_perps_on_party_id"
@@ -47,13 +58,15 @@ ActiveRecord::Schema.define(:version => 20120106230813) do
   add_index "statements", ["perp_id"], :name => "index_statements_on_perp_id"
 
   create_table "users", :force => true do |t|
-    t.string   "name"
+    t.string   "handle"
     t.string   "email"
+    t.string   "crypted_password"
+    t.string   "password_salt"
+    t.string   "persistence_token"
+    t.string   "perishable_token"
+    t.boolean  "admin",             :default => false
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "encrypted_password"
-    t.string   "salt"
-    t.boolean  "admin",              :default => false
   end
 
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true

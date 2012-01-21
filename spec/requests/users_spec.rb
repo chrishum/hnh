@@ -9,7 +9,7 @@ describe "Users" do
       it "should not make a new user" do
         lambda do
           visit register_path
-          fill_in "Name",             :with => ""
+          fill_in "Handle",             :with => ""
           fill_in "Email",            :with => ""
           fill_in "Password",         :with => ""
           fill_in "Confirm Password", :with => ""
@@ -25,7 +25,7 @@ describe "Users" do
       it "should make a new user" do
         lambda do
           visit register_path
-          fill_in "Name",             :with => "Example"
+          fill_in "Handle",             :with => "Example"
           fill_in "Email",            :with => "example@user.com"
           fill_in "Password",         :with => "foobar"
           fill_in "Confirm Password", :with => "foobar"
@@ -54,7 +54,11 @@ describe "Users" do
       it "should sign a user in and out" do
         integration_sign_in(Factory(:user))
         controller.should be_signed_in
+#        @user_session = UserSession.find
+#        @user_session.user.should_not == nil
         click_link "Sign out"
+#        @user_session = UserSession.find
+#        @user_session.user.should == nil
         controller.should_not be_signed_in
       end
     end

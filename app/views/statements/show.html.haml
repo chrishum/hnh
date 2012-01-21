@@ -1,0 +1,7 @@
+%h1 "#{@statement.content}"
+= @statement.perp_name
+
+/- unless @statement.comments.empty?
+/  %table.comments{ :summary => "Comments" }
+/    = render @comments
+/  = will_paginate @comments

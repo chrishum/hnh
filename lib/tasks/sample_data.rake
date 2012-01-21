@@ -4,10 +4,10 @@ namespace :db do
   desc "Fill database with sample data"
   task :populate => :environment do
     Rake::Task['db:reset'].invoke
-    admin = User.create!(:name          => "Charlie Humphreys", 
-                 :email                 => "charlie@humphreys.com", 
-                 :password              => "poochie", 
-                 :password_confirmation => "poochie")
+    admin = User.create!(:handle          => "Charlie Humphreys", 
+                         :email                 => "charlie@humphreys.com", 
+                         :password              => "poochie", 
+                         :password_confirmation => "poochie")
     admin.toggle!(:admin)
     
     Party.create!(:name => "Republican",  :three_letter => "Rep", :one_letter => "R")
@@ -26,6 +26,14 @@ namespace :db do
       50.times do
         perp.statements.create!(:content => Faker::Company.catch_phrase)
       end
+    end
+    
+    Perp.all.each do |perp|
+      @office = perp.offices.create!(:title => "Representative", 
+                           :state => Faker::Address.us_state_abbr,  
+                           :start_date => "2010-01-01")
+      @office.party_id = perp.party_id
+      @office.save!
     end
   end
 end

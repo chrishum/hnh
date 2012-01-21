@@ -74,6 +74,34 @@ describe StatementsController do
     end
   end
 
+  describe "GET 'show'" do
+    
+    before(:each) do
+      @statement = Factory(:statement)
+    end
+    
+    it "should be successful" do
+      get :show, :id => @statement
+      response.should be_success
+    end
+    
+    it "should find the right statement" do
+      get :show, :id => @statement
+      assigns(:statement).should == @statement
+    end
+    
+    it "should have the right title" do
+      get :show, :id => @statement
+      response.should have_selector("title", :content => @statement.perp_name)
+    end
+    
+    it "should include the statement's content" do
+      get :show, :id => @statement
+      response.should have_selector("h1", :content => @statement.content)
+    end
+  end
+
+
   describe "POST 'create'" do
     
     before(:each) do

@@ -7,6 +7,8 @@ gem 'jquery-rails'
 gem 'haml'
 gem 'will_paginate'
 gem 'faker'
+gem 'date_validator'
+gem 'authlogic'
 
 group :development do
   gem 'rspec-rails'

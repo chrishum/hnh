@@ -1,10 +1,10 @@
 %table.profile{:summary => "Profile information"}
   %tr
     %td.main
-      %h1= @user.name
+      %h1= @user.handle
     %td.sidebar.round
-      %strong Name 
-      = @user.name
+      %strong User 
+      = @user.handle
       %br/
       %strong URL 
       = link_to user_path(@user), @user

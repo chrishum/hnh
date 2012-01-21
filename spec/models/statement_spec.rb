@@ -25,6 +25,25 @@ describe Statement do
       @statement.perp_id.should == @perp.id
       @statement.perp.should == @perp
     end
+    
+    it "should have a party attribute" do
+      @statement.should respond_to(:party)
+    end
+    
+    it "should have the correct party_name attribute" do
+      @statement.should respond_to(:party_name)
+      @statement.party_name.should == @perp.party_name
+    end
+    
+    it "should have the correct party_three_letter attribute" do
+      @statement.should respond_to(:party_three_letter)
+      @statement.party_three_letter.should == @perp.party_three_letter
+    end
+    
+    it "should have the correct party_one_letter attribute" do
+      @statement.should respond_to(:party_one_letter)
+      @statement.party_one_letter.should == @perp.party_one_letter
+    end
   end
   
   describe "validations" do

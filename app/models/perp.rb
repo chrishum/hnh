@@ -3,6 +3,13 @@ class Perp < ActiveRecord::Base
   
   belongs_to :party
   has_many   :statements, :dependent => :destroy
+  has_many   :offices,    :dependent => :destroy
+
+  delegate :name, 
+           :three_letter, 
+           :one_letter, 
+           :to => :party, 
+           :prefix => true
 
   validates :first_name, :presence => true, 
                          :length   => { :maximum => 25 }
@@ -10,6 +17,9 @@ class Perp < ActiveRecord::Base
                          :length   => { :maximum => 25 }
   validates :party_id,   :presence => true
   
+  def full_name
+    "#{first_name} #{last_name}"
+  end
 end
 # == Schema Information
 #

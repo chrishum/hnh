@@ -1,7 +1,7 @@
 class PartiesController < ApplicationController
   
-  before_filter :authenticate, :only => [:new, :create, :edit, :update, :destroy]
-  before_filter :admin_user,   :only => [:new, :create, :edit, :update, :destroy]
+  before_filter :require_user,  :only => [:new, :create, :edit, :update, :destroy]
+  before_filter :require_admin, :only => [:new, :create, :edit, :update, :destroy]
   
   def index
     @title = "Parties"

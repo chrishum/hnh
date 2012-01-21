@@ -1,10 +1,15 @@
 class StatementsController < ApplicationController
   
-  before_filter :authenticate, :only => [:new, :create, :edit, :update, :destroy]
+  before_filter :require_user, :only => [:new, :create, :edit, :update, :destroy]
   
   def index
     @title = "Statements"
     @statements = Statement.paginate(:page => params[:page], :per_page => 10)
+  end
+  
+  def show
+    @statement = Statement.find(params[:id])
+    @title = @statement.perp_name
   end
   
   def new

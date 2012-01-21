@@ -7,6 +7,7 @@ describe UsersController do
     
     before(:each) do
       @user = Factory(:user)
+      test_sign_in(@user)
     end
     
     it "should be successful" do
@@ -21,12 +22,12 @@ describe UsersController do
     
     it "should have the right title" do
       get :show, :id => @user
-      response.should have_selector("title", :content => @user.name)
+      response.should have_selector("title", :content => @user.handle)
     end
     
     it "should include the user's name" do
       get :show, :id => @user
-      response.should have_selector("h1", :content => @user.name)
+      response.should have_selector("h1", :content => @user.handle)
     end
   end
 
@@ -45,7 +46,7 @@ describe UsersController do
     
       it "should have a name field" do
         get :new
-        response.should have_selector("input[name='user[name]'][type='text']")
+        response.should have_selector("input[name='user[handle]'][type='text']")
       end
 
       it "should have an email field" do
@@ -67,7 +68,8 @@ describe UsersController do
     describe "as signed-in user" do
       
       before(:each) do
-        test_sign_in(Factory(:user, :email => "signed.in@user.com"))
+        @user = Factory(:user, :email => "signed.in@user.com")
+        test_sign_in(@user)
       end
       
       it "should redirect to root path" do
@@ -83,7 +85,7 @@ describe UsersController do
       
       before(:each) do
         @attr = { 
-          :name => "", 
+          :handle => "", 
           :email => "", 
           :password => "", 
           :password_confirmation => ""
@@ -111,7 +113,7 @@ describe UsersController do
       
       before(:each) do
         @attr = {
-          :name => "New User", 
+          :handle => "New User", 
           :email => "new@email.com", 
           :password => "foobar", 
           :password_confirmation => "foobar"
@@ -126,7 +128,8 @@ describe UsersController do
       
       it "should sign the user in" do
         post :create, :user => @attr
-        controller.should be_signed_in
+        @user_session = UserSession.find
+        @user_session.user.should_not == nil
       end
       
       it "should redirect to the user show page" do
@@ -181,7 +184,7 @@ describe UsersController do
     describe "failure" do
       
       before(:each) do
-        @attr = {:email => "", :name => "", :password => "", 
+        @attr = {:email => "", :handle => "", :password => "", 
                  :password_confirmation => ""}
       end
       
@@ -200,7 +203,7 @@ describe UsersController do
       
       before(:each) do
         @attr = { 
-          :name => "New Name", 
+          :handle => "New Name", 
           :email => "user@example.org", 
           :password => "barbaz", 
           :password_confirmation => "barbaz"
@@ -210,7 +213,7 @@ describe UsersController do
       it "should change the user's attributes" do
         put :update, :id => @user, :user => @attr
         @user.reload
-        @user.name.should  == @attr[:name]
+        @user.handle.should  == @attr[:handle]
         @user.email.should == @attr[:email]
       end
       

@@ -2,6 +2,7 @@ class Party < ActiveRecord::Base
   attr_accessible :name, :three_letter, :one_letter
   
   has_many :perps
+  has_many :offices
 
   validates :name,         :presence   => true,
                            :length     => { :maximum => 30 },
