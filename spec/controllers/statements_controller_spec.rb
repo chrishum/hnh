@@ -5,13 +5,17 @@ describe StatementsController do
   
   describe "access control" do
     
+    before(:each) do
+      @perp = Factory(:perp)
+    end
+    
     it "should deny access to 'create'" do
-      post :create
+      post :create, :perp_id => @perp
       response.should redirect_to(signin_path)
     end
     
     it "should deny access to 'destroy'" do
-      delete :destroy, :id => 1
+      delete :destroy, :perp_id => @perp, :id => 1
       response.should redirect_to(signin_path)
     end
   end
@@ -78,29 +82,34 @@ describe StatementsController do
     
     before(:each) do
       @statement = Factory(:statement)
+      @perp = @statement.perp
     end
     
     it "should be successful" do
-      get :show, :id => @statement
+      get :show, :perp_id => @perp, :id => @statement
       response.should be_success
     end
     
     it "should find the right statement" do
-      get :show, :id => @statement
+      get :show, :perp_id => @perp, :id => @statement
       assigns(:statement).should == @statement
     end
     
     it "should have the right title" do
-      get :show, :id => @statement
+      get :show, :perp_id => @perp, :id => @statement
       response.should have_selector("title", :content => @statement.perp_name)
     end
     
     it "should include the statement's content" do
-      get :show, :id => @statement
-      response.should have_selector("h1", :content => @statement.content)
+      get :show, :perp_id => @perp, :id => @statement
+      response.should have_selector("h1", :content => "\"" + @statement.content + "\"")
+    end
+    
+    it "should include a link with the perp's name" do
+      get :show, :perp_id => @perp, :id => @statement
+      response.should have_selector("a", :content => @statement.perp_name)
     end
   end
-
 
   describe "POST 'create'" do
     
@@ -112,17 +121,23 @@ describe StatementsController do
     describe "failure" do
       
       before(:each) do
-        @attr = { :content => "" }
+        @attr = { :content          => "", 
+                  :date             => "", 
+                  :primary_source   => "", 
+                  :context          => "", 
+                  :why_hypocritical => "", 
+                  :why_hyperbolical => "" 
+                  }
       end
       
       it "should not create a statement" do
         lambda do
-          post :create, :statement => @attr, :perp => @perp
+          post :create, :perp_id => @perp, :statement => @attr
         end.should_not change(Statement, :count)
       end
       
       it "should render the perp page" do
-        post :create, :statement => @attr, :perp => @perp
+        post :create, :perp_id => @perp, :statement => @attr
         response.should redirect_to(perp_path(@perp))
       end
     end
@@ -130,22 +145,28 @@ describe StatementsController do
     describe "success" do
       
       before(:each) do
-        @attr = { :content => "Lorem ipsum", :perp_id => @perp }
+        @attr = { :content          => "Bluster and hot air.", 
+                  :date             => "2011-12-31", 
+                  :primary_source   => "http://www.source.com", 
+                  :context          => "Overheard in a bathroom stall at the Minneapolis airport.", 
+                  :why_hypocritical => "Just because, OK?", 
+                  :why_hyperbolical => "Why not?" 
+                  }
       end
       
       it "should create a statement" do
         lambda do
-          post :create, :statement => @attr, :perp => @perp
+          post :create, :perp_id => @perp, :statement => @attr
         end.should change(Statement, :count).by(1)
       end
       
       it "should redirect to the perp page" do
-        post :create, :statement => @attr, :perp => @perp
+        post :create, :perp_id => @perp, :statement => @attr
         response.should redirect_to(perp_path(@perp))
       end
       
       it "should have a flash message" do
-        post :create, :statement => @attr, :perp => @perp
+        post :create, :perp_id => @perp, :statement => @attr
         flash[:success].should =~ /statement created/i
       end
     end

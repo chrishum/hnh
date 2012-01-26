@@ -17,6 +17,13 @@ class Perp < ActiveRecord::Base
                          :length   => { :maximum => 25 }
   validates :party_id,   :presence => true
   
+  scope :trending, order("statements_count desc")
+  scope :top,      lambda {|l| limit(l)}
+  
+  def self.find_top_trending_perps(limit = 5)
+    trending.top(limit)
+  end
+  
   def full_name
     "#{first_name} #{last_name}"
   end

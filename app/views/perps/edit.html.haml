@@ -1,5 +1,5 @@
 %h1 Edit Perp
 = form_for(@perp) do |f|
-  = render 'fields', :f => f
+  = render 'fields', :f => f, :parties => @parties
   .actions
     = f.submit "Update"

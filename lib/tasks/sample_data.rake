@@ -14,7 +14,7 @@ namespace :db do
     Party.create!(:name => "Democrat",    :three_letter => "Dem", :one_letter => "D")
     Party.create!(:name => "Independent", :three_letter => "Ind", :one_letter => "I")
     
-    99.times do |n|
+    30.times do |n|
       first_name = Faker::Name.first_name
       last_name  = Faker::Name.last_name
       party      = Party.find_by_id(1 + Random.rand(3))
@@ -22,9 +22,11 @@ namespace :db do
                    :last_name  => last_name)
     end
     
-    Perp.all(:limit => 6).each do |perp|
-      50.times do
-        perp.statements.create!(:content => Faker::Company.catch_phrase)
+    Perp.all.each do |perp|
+      (rand * 50).ceil.times do
+        perp.statements.create!(:content => Faker::Company.catch_phrase, 
+                                :date => (rand * 3000).days.ago, 
+                                :context => Faker::Lorem.sentences(4).join(" "))
       end
     end
     
@@ -37,4 +39,3 @@ namespace :db do
     end
   end
 end
-      

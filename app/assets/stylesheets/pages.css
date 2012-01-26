@@ -3,33 +3,115 @@
   They will automatically be included in application.css.
 */
 
-.container {
-	width: 710px;
+body {
+	background: #7ad;
 }
 
-body {
+.container {
+	position: relative;
+	max-width: 1000px;
 	background: #025;
+	padding: 0 10px 0 10px;
+	border-left: 1px solid #aaa;
+	border-right: 1px solid #aaa;
+	border-bottom: 1px solid #aaa;
 }
+
+.spacer {
+	width: 100%;
+	height: 70px;
+}
+
+
+/* Header */
 
 header {
-	padding-top: 20px;
+	position: relative;
+	width: 100%;
+	max-width: 1000px;
+	height: 70px;
+	z-index: 5;
+	background: #025;
+	border-bottom: 1px solid #aaa;
 }
 
-header img {
-	padding: 1em;
-	background: #fff;
+header *.logo{
+	display: inline-block;
+	overflow: visible;
+	padding: 3px 0;	
 }
 
-section {
-	margin-top: 1em;
-	font-size: 120%;
-	padding: 20px;
-	background: #fff;
+header *.logo h1 {
+	font-size: 250%;
+	margin-bottom: 0;
+	letter-spacing: 2px;
+}
+header *.logo a {
+	color: white;
+	text-decoration: none;
 }
 
-section h1 {
-	font-size: 200%;
+header *.logo a:hover {
+	color: white;
+	text-decoration: none;
 }
+
+header *.logo a:visited {
+	color: white;
+	text-decoration: none;
+}
+
+header *.logo *.subtitle {
+	font-size: 150%;
+	font-style: italic;
+	font-weight: lighter;
+	letter-spacing: 2px;
+	word-spacing: 2px;
+	color: #aaa;
+}
+
+
+
+/* Navigation */
+
+header nav {
+	position: absolute;
+	top: 0;
+	right: 0;
+	-moz-border-radius: 0 0 0 10px / 0 0 0 20px;
+	-webkit-border-radius: 0 0 0 10px / 0 0 0 20px;
+	border-radius: 0 0 0 10px / 0 0 0 20px;
+	background-color: #eee;
+	padding: 0.3em 0.3em 0.3em 0.5em;
+	white-space: nowrap;
+}
+
+nav ul {
+	margin: 0;
+	padding: 0;
+}
+
+nav ul li {
+	list-style-type: none;
+	display: inline-block;
+	padding: 0 1em;
+}
+
+nav ul li a {
+	color: #025;
+	text-decoration: none;
+}
+
+nav ul li a:visited {
+	color: #06c;
+}
+
+nav ul li a:hover {
+	color: #f00;
+	text-decoration: none;
+}
+
+
 
 /* Links */
 
@@ -47,77 +129,23 @@ a:visited {
 	color: #06c;
 }
 
-/* Navigation */
-
-nav {
-	float: right;
-}
-
-nav {
-	background-color: white;
-	padding: 0 0.7em;
-	white-space: nowrap;
-}
-
-nav ul {
-	margin: 0;
-	padding: 0;
-}
-
-nav ul li {
-	list-style-type: none;
-	display: inline-block;
-	padding: 0.2em 1em;
-}
-
-nave ul li a {
-	padding: 0 5px;
-	font-weight: bold;
-}
-
-nav ul li a:visited {
-	color: #06c;
-}
-
-nav ul li a:hover {
-	text-decoration: underline;
-}
-
-/* Register button */
-
-a.register_button {
-	margin-left: auto;
-	margin-right: auto;
-	display: block;
-	text-align: center;
-	width: 100px;
-	color: #fff;
-	background: #006400;
-	font-weight: bold;
-	padding: 10px;
-}
-
 /* Footer */
 
 footer {
+	clear: both;
 	text-align: center;
-	margin-top: 10px;
-	width: 710px;
-	margin-left: auto;
-	margin-right: auto;
 }
 
 footer nav {
-	float: none;
+	display: inline-block;
+	padding: 0 20px;
+	background: #eee;
+	-moz-border-radius: 0 0 10px 10px / 0 0 20px 20px;
+	-webkit-border-radius: 0 0 10px 10px / 0 0 20px 20px;
+	border-radius: 0 0 10px 10px / 0 0 20px 20px;
 }
 
-/* Round corners */
 
-.round {
-	-moz-border-radius: 10px;
-	-webkit-border-radius: 10px;
-	border-radius: 10px;
-}
 
 /* Error messages */
 

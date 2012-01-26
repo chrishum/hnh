@@ -1,12 +1,12 @@
-%header 
-  = link_to logo, root_path
-  %nav.round
+%header.header 
+  .logo
+    %h1= link_to "HYPOCRITES & HYPERBOLISTS", root_path, :class => "logo"
+    %span.subtitle Keep those civil servants civil
+  %nav
     %ul
-      %li= link_to "Home", root_path
       %li= link_to "Perps", perps_path
       - if current_user
-        %li= link_to "Profile", current_user
-        %li= link_to "Settings", edit_user_path(current_user)
+        %li= link_to "Profile", edit_user_path(current_user)
         %li= link_to "Sign out", signout_path, :method => :delete
       - else
         %li= link_to "Sign in", signin_path

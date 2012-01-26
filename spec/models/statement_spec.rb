@@ -4,7 +4,13 @@ describe Statement do
   
   before(:each) do
     @perp = Factory(:perp)
-    @attr = { :content => "value for content" }
+    @attr = { :content          => "Bluster and hot air.", 
+              :date             => "2011-12-31", 
+              :primary_source   => "http://www.source.com", 
+              :context          => "Overheard in a bathroom stall at the Minneapolis airport.", 
+              :why_hypocritical => "Just because, OK?", 
+              :why_hyperbolical => "Why not?" 
+              }
   end
   
   it "should create a new instance given valid attributes" do
@@ -47,32 +53,42 @@ describe Statement do
   end
   
   describe "validations" do
-    
+        
     it "should require a perp id" do
       Statement.new(@attr).should_not be_valid
     end
     
     it "should require nonblank content" do
-      @perp.statements.build(:content => "  ").should_not be_valid
+      @perp.statements.build(@attr.merge(:content => "  ")).should_not be_valid
     end
     
     it "should reject long content" do
-      @perp.statements.build(:content => "a" * 141).should_not be_valid
+      @perp.statements.build(@attr.merge(:content => "a" * 141)).should_not be_valid
     end
+    
+    it "should require nonblank context" do
+      @perp.statements.build(@attr.merge(:context => "  ")).should_not be_valid
+    end
+    
+    it "should reject long context" do
+      @perp.statements.build(@attr.merge(:context => "a" * 251)).should_not be_valid
+    end
+    
   end
 end
 # == Schema Information
 #
 # Table name: statements
 #
-#  id             :integer         not null, primary key
-#  content        :string(255)
-#  perp_id        :integer
-#  date           :date
-#  primary_source :string(255)
-#  context        :text
-#  description    :text
-#  created_at     :datetime
-#  updated_at     :datetime
+#  id               :integer         not null, primary key
+#  content          :string(255)
+#  perp_id          :integer
+#  date             :date
+#  primary_source   :string(255)
+#  context          :text
+#  why_hypocritical :text
+#  created_at       :datetime
+#  updated_at       :datetime
+#  why_hypothetical :text
 #
 

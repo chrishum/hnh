@@ -4,6 +4,6 @@
 = pluralize(@perp.statements.count, "statement")
 
 - unless @perp.statements.empty?
-  %table.statements{ :summary => "User statements" }
+  %table.statements{ :summary => "Perp statements" }
     = render @statements
   = will_paginate @statements

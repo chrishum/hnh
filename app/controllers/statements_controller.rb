@@ -16,7 +16,7 @@ class StatementsController < ApplicationController
   end
   
   def create
-    @perp = Perp.find_by_id(params[:perp])
+    @perp = Perp.find_by_id(params[:perp_id])
     @statement = @perp.statements.build(params[:statement])
     if @statement.save
       flash[:success] = "Statement created!"

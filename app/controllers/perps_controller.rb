@@ -16,15 +16,17 @@ class PerpsController < ApplicationController
   
   def new
     @perp = Perp.new
+    @parties = Party.all
     @title = "New Perp"
   end
   
   def create
-    @party = Party.find_by_id(params[:party])
+    @party = Party.find_by_id(params[:perp][:party_id])
     @perp = @party.perps.build(params[:perp])
     if @perp.save
       redirect_to @perp
     else
+      @parties = Party.all
       @title = "New Perp"
       render 'new'
     end
@@ -32,19 +34,19 @@ class PerpsController < ApplicationController
   
   def edit
     @perp = Perp.find(params[:id])
+    @parties = Party.all
     @title = "Edit perp"
   end
   
   def update
     @perp = Perp.find(params[:id])
-    if params[:party]
-      @perp.party = Party.find_by_id(params[:party])
-      @perp.save
-    end
-    if @perp.update_attributes(params[:perp])
+    @perp.attributes = params[:perp]
+    @perp.party_id = params[:perp][:party_id]
+    if @perp.save
       flash[:success] = "Perp updated."
       redirect_to @perp
     else
+      @parties = Party.all
       @title = "Edit perp"
       render 'edit'
     end

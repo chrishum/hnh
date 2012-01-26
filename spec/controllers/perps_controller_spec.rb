@@ -95,13 +95,28 @@ describe PerpsController do
   
   describe "GET 'new'" do
     it "returns http success" do
-      get 'new'
+      get :new
       response.should be_success
     end
     
     it "should have the right title" do
-      get 'new'
+      get :new
       response.should have_selector("title", :content => "New Perp")
+    end
+    
+    it "should have a field for first name" do
+      get :new
+      response.should have_selector("input[name='perp[first_name]'][type='text']")
+    end
+
+    it "should have a field for last name" do
+      get :new
+      response.should have_selector("input[name='perp[last_name]'][type='text']")
+    end
+
+    it "should have a field for party" do
+      get :new
+      response.should have_selector("select[name='perp[party_id]']")
     end
   end
   
@@ -116,23 +131,24 @@ describe PerpsController do
       before(:each) do
         @attr = { 
           :first_name => "", 
-          :last_name => ""
+          :last_name => "", 
+          :party_id => @party.id
           }
       end
       
       it "should not create a perp" do
         lambda do
-          post :create, :perp => @attr, :party => @party
+          post :create, :perp => @attr
         end.should_not change(Perp, :count)
       end
       
       it "should have the right title" do
-        post :create, :perp => @attr, :party => @party
+        post :create, :perp => @attr
         response.should have_selector("title", :content => "New Perp")
       end
       
       it "should render the 'new' page" do
-        post :create, :perp => @attr, :party => @party
+        post :create, :perp => @attr
         response.should render_template('new')
       end
     end
@@ -142,23 +158,24 @@ describe PerpsController do
       before(:each) do
         @attr = {
           :first_name => "New", 
-          :last_name => "Perp"
+          :last_name => "Perp", 
+          :party_id => @party.id
           }
       end
       
       it "should create a perp" do
         lambda do
-          post :create, :perp => @attr, :party => @party
+          post :create, :perp => @attr
         end.should change(Perp, :count).by(1)
       end
       
       it "should assign the correct party" do
-        post :create, :perp => @attr, :party => @party
+        post :create, :perp => @attr
         Perp.last.party.should == @party
       end
             
       it "should redirect to the perp show page" do
-        post :create, :perp => @attr, :party => @party
+        post :create, :perp => @attr
         response.should redirect_to(perp_path(assigns(:perp)))
       end
     end
@@ -192,10 +209,10 @@ describe PerpsController do
     describe "failure" do
       
       before(:each) do
-        @party = ""
         @attr = {
           :first_name => "", 
-          :last_name => ""
+          :last_name => "", 
+          :party_id => ""
         }
       end
       
@@ -216,12 +233,13 @@ describe PerpsController do
         @party = Factory(:party)
         @attr = {
           :first_name => "New", 
-          :last_name => "Perp"
+          :last_name => "Perp", 
+          :party_id => @party.id
         }
       end
       
       it "should change the perp's attributes" do
-        put :update, :id => @perp, :perp => @attr, :party => @party
+        put :update, :id => @perp, :perp => @attr
         @perp.reload
         @perp.first_name.should == @attr[:first_name]
         @perp.last_name.should  == @attr[:last_name]
@@ -229,12 +247,12 @@ describe PerpsController do
       end
       
       it "should redirect to the perp show page" do
-        put :update, :id => @perp, :perp => @attr, :party => @party
+        put :update, :id => @perp, :perp => @attr
         response.should redirect_to(perp_path(@perp))
       end
       
       it "should have a flash message" do
-        put :update, :id => @perp, :perp => @attr, :party => @party
+        put :update, :id => @perp, :perp => @attr
         flash[:success].should =~ /updated/
       end
     end

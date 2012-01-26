@@ -1,5 +1,8 @@
 %h1 "#{@statement.content}"
-= @statement.perp_name
+= link_to @statement.perp_name, perp_path(@statement.perp)
+%br/
+= surround "(", ")" do
+  = @statement.context
 
 /- unless @statement.comments.empty?
 /  %table.comments{ :summary => "Comments" }

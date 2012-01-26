@@ -1,16 +1,41 @@
-%tr
-  %td.statement
-    %span.content= "\"" + statement.content + "\""
-    %br/
-    %span.perp 
-      #{statement.perp.full_name}
-      = surround " (", ")" do
-        = statement.perp.party_name
-  %td.details
-    %span.timestamp Posted #{time_ago_in_words(statement.created_at)} ago.
+.statement
+  .content
+    %img.total_score{:src => "\#", :alt => "Total Score"}
+    %span.party= statement.perp.party_name
+    %span.timestamp #{time_ago_in_words(statement.date)} ago.
+    %h1= link_to "\"" + statement.content + "\"", perp_statement_path(statement.perp_id, statement.id)
+    %span.context= statement.context
+  .perp
+    %h2.perp_name= link_to statement.perp_name, perp_path(statement.perp_id)
+    %img.perp_thumb{:src => "\#", :alt => "Perp Image"}
+  .details
     - if current_user && current_user.admin?
       %span.delete
         = surround "(", ")" do
           = link_to "delete", perp_statement_path(statement.perp_id, statement.id), :method => :delete, 
-                                         :confirm => "You sure?", 
-                                         :title => "Delete #{statement.perp}: #{statement.content}"
+                              :confirm => "You sure?", 
+                              :title => "Delete #{statement.perp}: #{statement.content}"    
+
+-#
+  %tr{:height => "2em"}
+    %td.perp{:width => "120"}
+      = link_to statement.perp_name, perp_path(statement.perp_id)
+    %td.party
+      = statement.perp.party_name
+  %tr
+    %td.picture
+      %img{:src => "\#", :alt => "Perp Image", :height => "100", :width => "100"}
+    %td.statement
+      %span.content
+        = link_to "\"" + statement.content + "\"", perp_statement_path(statement.perp_id, statement.id)
+      %br/
+      %span.context
+        = statement.context
+  %tr
+    %td.details
+      %span.timestamp #{time_ago_in_words(statement.date)} ago.
+      - if current_user && current_user.admin?
+        %span.delete
+          = surround "(", ")" do
+            = link_to "delete", perp_statement_path(statement.perp_id, statement.id), :method => :delete, :confirm => "You sure?", :title => "Delete #{statement.perp}: #{statement.content}"
+    %td

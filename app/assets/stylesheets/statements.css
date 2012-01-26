@@ -3,53 +3,110 @@
   They will automatically be included in application.css.
 */
 
-h1.statement {
-	margin-bottom: 0.3em;
+#statements {
+	float: left;
+	background: white;
+	padding: 0 10px 0 10px;
 }
 
-table.statements {
-	margin-top: 1em;
+#statements *.statement {
+	float: left;
+	position: relative;
+	padding-left: 150px;
+	padding-right: 170px;
+	border-bottom: 1px solid #aaa;
+	overflow: hidden;
 }
 
-table.statements tr {
-	height: 70px;
+#statements *.statement:hover {
+	background: #eee;
 }
 
-table.statements tr td {
-	border-top: 1px solid #ccc;
-	vertical-align: top;
-	padding-top: 10px;
-}
-
-table.statements tr td.statement span.content {
-	
-	font-size: 120%;
-	font-weight: bold;;
-}
-
-table.statements tr td.statement span.perp {
-	display: block;
-	font-size: 85%;
-	font-style: italic;
-}
-
-table.statements tr td.details span.timestamp {
-	display: block;
-	font-size: 85%;
-	color: #666;
-	text-align: right;
-}
-
-table.statements tr td.details span.delete {
-	display: block;
-	font-size: 50%;
-	color: #666;
-	text-align: right;
-}
-
-table.statements tr td.details span.delete a {
+#statements *.statement a:hover {
+	color: #f00;
 	text-decoration: none;
-	color: #666;
+}
+
+#statements *.content {
+	float: left;
+	position: relative;
+	width: 100%;
+	padding: 5px 10px;
+}
+
+#statements img.total_score {
+	position: inline;
+	height: 20px;
+	width: 20px;
+	margin-right: 10px;
+}
+
+#statements *.party {
+	position: inline;
+	font-size: 11pt;
+	font-style: italic;
+	vertical-align: top;
+	color: #aaa;
+}
+
+#statements *.timestamp {
+	float: right;
+	font-size: 9pt;
+	font-style: italic;
+	color: #aaa;
+}
+
+#statements h1 {
+	font-size: 14pt;
+	font-weight: bold;
+	color: black;
+}
+
+#statements h1 a {
+	color: black;
+	text-decoration: none;
+}
+
+#statements *.context {
+	font-size: 10pt;
+	color: #888;
+}
+
+#statements *.perp {
+	float: left;
+	position: relative;
+	width: 150px;
+	padding: 5px 0;
+	margin-left: -100%;
+	right: 170px;
+}
+
+* html #statements *.perp {
+	left: 150px;
+}
+
+#statements h2.perp_name {
+	font-size: 10pt;
+	font-weight: bold;
+	color: #059;
+}
+
+#statements *.perp a {
+	color: #059;
+	text-decoration: none;
+}
+
+#statements img.perp_thumb {
+	width: 100px;
+	height: 100px;
+}
+
+#statements *.details {
+	float: left;
+	position: relative;
+	width: 130px;
+	padding: 5px 10px;
+	margin-right: -170px;
 }
 
 /* New Statement form */

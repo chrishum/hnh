@@ -27,6 +27,10 @@ Factory.sequence :name do |n|
 end
 
 Factory.define :statement do |statement|
-  statement.content "Foo bar"
+  statement.content          "Foo bar"
+  statement.date             "2001-01-01"
+  statement.context          "Context for the statement."
+  statement.why_hypocritical "Reasons why the statement is hypocritical"
+  statement.why_hyperbolical "Reasons why the statement is hyperbolical"
   statement.association :perp
 end

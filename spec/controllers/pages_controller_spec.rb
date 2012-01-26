@@ -18,6 +18,23 @@ describe PagesController do
       response.should have_selector("title", 
                                     :content => @base_title + " | Home")
     end
+    
+    describe "latest statements section" do
+      
+      before(:each) do
+        @statements = []
+        @statements << Factory(:statement)
+        @statements << Factory(:statement)
+        @statements << Factory(:statement)
+      end
+        
+      it "should have a list of the latest statements" do
+        get 'home'
+        response.should have_selector("td", :content => @statements[0].content)
+        response.should have_selector("td", :content => @statements[1].content)
+        response.should have_selector("td", :content => @statements[2].content)
+      end
+    end
   end
 
   describe "GET 'contact'" do

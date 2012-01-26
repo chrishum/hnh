@@ -59,8 +59,8 @@ describe Perp do
     
     before(:each) do
       @perp = @party.perps.create(@attr)
-      @st1 = Factory(:statement, :perp => @perp, :created_at => 1.day.ago)
-      @st2 = Factory(:statement, :perp => @perp, :created_at => 1.hour.ago)
+      @st1 = Factory(:statement, :perp => @perp, :date => 1.week.ago)
+      @st2 = Factory(:statement, :perp => @perp, :date => 1.day.ago)
     end
     
     it "should have a statements attribute" do

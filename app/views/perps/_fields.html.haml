@@ -8,6 +8,6 @@
   %br/
   = f.text_field :last_name
 .field
-  = f.label :party
+  = f.label :party_id
   %br/
-  = f.text_field :party
+  = f.collection_select(:party_id, parties, :id, :name, { :prompt => true })

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120109172931) do
+ActiveRecord::Schema.define(:version => 20120124030748) do
 
   create_table "offices", :force => true do |t|
     t.string   "title"
@@ -40,6 +40,7 @@ ActiveRecord::Schema.define(:version => 20120109172931) do
     t.integer  "party_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "statements_count", :default => 0
   end
 
   add_index "perps", ["party_id"], :name => "index_perps_on_party_id"
@@ -50,9 +51,10 @@ ActiveRecord::Schema.define(:version => 20120109172931) do
     t.date     "date"
     t.string   "primary_source"
     t.text     "context"
-    t.text     "description"
+    t.text     "why_hypocritical"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.text     "why_hyperbolical"
   end
 
   add_index "statements", ["perp_id"], :name => "index_statements_on_perp_id"

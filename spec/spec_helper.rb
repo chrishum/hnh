@@ -53,6 +53,7 @@ Spork.prefork do
       fill_in :password, :with => user.password
       click_button
     end
+    
   end
 end
 

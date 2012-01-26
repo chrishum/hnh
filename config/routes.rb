@@ -2,8 +2,9 @@ Hnh::Application.routes.draw do
 
   resources :users, :user_sessions
   resources :perps do
-    resources :statements
+    resources :statements, :except => :index
   end
+  resources :statements,   :only => :index
   resources :parties
   
   match '/register', :to => 'users#new'
