@@ -4,7 +4,7 @@
 */
 
 body {
-	background: #7ad;
+	background: #ddd;
 }
 
 .container {
@@ -94,11 +94,12 @@ nav ul {
 nav ul li {
 	list-style-type: none;
 	display: inline-block;
+	position: relative;
 	padding: 0 1em;
 }
 
 nav ul li a {
-	color: #025;
+	color: #06c;
 	text-decoration: none;
 }
 

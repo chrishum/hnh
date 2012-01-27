@@ -26,6 +26,10 @@ class Statement < ActiveRecord::Base
   def perp_name
     perp.full_name
   end
+  
+  def perp_thumb_url
+    perp.thumb_url
+  end
 end
 # == Schema Information
 #
@@ -40,6 +44,6 @@ end
 #  why_hypocritical :text
 #  created_at       :datetime
 #  updated_at       :datetime
-#  why_hypothetical :text
+#  why_hyperbolical :text
 #
 

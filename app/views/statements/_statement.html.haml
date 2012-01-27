@@ -1,20 +1,20 @@
 .statement
   .content
-    %img.total_score{:src => "\#", :alt => "Total Score"}
     %span.party= statement.perp.party_name
-    %span.timestamp #{time_ago_in_words(statement.date)} ago.
-    %h1= link_to "\"" + statement.content + "\"", perp_statement_path(statement.perp_id, statement.id)
-    %span.context= statement.context
-  .perp
-    %h2.perp_name= link_to statement.perp_name, perp_path(statement.perp_id)
-    %img.perp_thumb{:src => "\#", :alt => "Perp Image"}
-  .details
     - if current_user && current_user.admin?
       %span.delete
         = surround "(", ")" do
           = link_to "delete", perp_statement_path(statement.perp_id, statement.id), :method => :delete, 
                               :confirm => "You sure?", 
                               :title => "Delete #{statement.perp}: #{statement.content}"    
+    %span.timestamp #{time_ago_in_words(statement.date)} ago.
+    %h1= link_to "\"" + statement.content + "\"", perp_statement_path(statement.perp_id, statement.id)
+    %span.context= statement.context
+  .perp
+    %h2.perp_name= link_to statement.perp_name, perp_path(statement.perp_id)
+    = image_tag statement.perp_thumb_url, :alt => statement.perp_name, :class => "perp_thumb"
+  .details
+    %span.total_score= (rand * 100).ceil
 
 -#
   %tr{:height => "2em"}

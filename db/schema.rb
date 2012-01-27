@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120124030748) do
+ActiveRecord::Schema.define(:version => 20120126225522) do
 
   create_table "offices", :force => true do |t|
     t.string   "title"
@@ -41,6 +41,9 @@ ActiveRecord::Schema.define(:version => 20120124030748) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "statements_count", :default => 0
+    t.string   "middle_name",      :default => ""
+    t.string   "name_suffix",      :default => ""
+    t.string   "bioguide_id"
   end
 
   add_index "perps", ["party_id"], :name => "index_perps_on_party_id"

@@ -9,6 +9,7 @@ gem 'will_paginate'
 gem 'faker'
 gem 'date_validator'
 gem 'authlogic'
+gem 'sunlight'
 
 group :development do
   gem 'rspec-rails'

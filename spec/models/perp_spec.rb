@@ -110,11 +110,15 @@ end
 #
 # Table name: perps
 #
-#  id         :integer         not null, primary key
-#  first_name :string(255)
-#  last_name  :string(255)
-#  created_at :datetime
-#  updated_at :datetime
-#  party_id   :integer
+#  id               :integer         not null, primary key
+#  first_name       :string(255)
+#  last_name        :string(255)
+#  party_id         :integer
+#  created_at       :datetime
+#  updated_at       :datetime
+#  statements_count :integer         default(0)
+#  middle_name      :string(255)     default("")
+#  name_suffix      :string(255)     default("")
+#  bioguide_id      :string(255)
 #
 

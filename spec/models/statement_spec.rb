@@ -89,6 +89,6 @@ end
 #  why_hypocritical :text
 #  created_at       :datetime
 #  updated_at       :datetime
-#  why_hypothetical :text
+#  why_hyperbolical :text
 #
 
