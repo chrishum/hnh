@@ -1,6 +1,9 @@
 .statement
   .content
-    %span.party= statement.perp.party_name
+    %span.perp
+      %span.perp_name= link_to statement.perp_name, perp_path(statement.perp_id)
+      = surround " (", ")" do
+        #{statement.party_name}
     - if current_user && current_user.admin?
       %span.delete
         = surround "(", ")" do
@@ -10,10 +13,9 @@
     %span.timestamp #{time_ago_in_words(statement.date)} ago.
     %h1= link_to "\"" + statement.content + "\"", perp_statement_path(statement.perp_id, statement.id)
     %span.context= statement.context
-  .perp
-    %h2.perp_name= link_to statement.perp_name, perp_path(statement.perp_id)
+  .perp_image{:class => statement.party_one_letter}
     = image_tag statement.perp_thumb_url, :alt => statement.perp_name, :class => "perp_thumb"
-  .details
+  .scores
     .score.hypocrisy{:class => score_color_class(statement.hypocrisy_score)}= score_value(statement.hypocrisy_score)
     .score.hyperbole{:class => score_color_class(statement.hyperbole_score)}= score_value(statement.hyperbole_score)
     .score.overall{:class => score_color_class(statement.score)}= score_value(statement.score)
