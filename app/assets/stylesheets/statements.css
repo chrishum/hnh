@@ -9,14 +9,6 @@
 	padding: 0 10px 0 10px;
 }
 
-#statements a {
-	color: #06c;
-}
-
-#statements a:visited {
-	color: #06c;
-}
-
 #statements *.statement {
 	float: left;
 	position: relative;
@@ -32,7 +24,6 @@
 
 #statements *.statement a:hover {
 	color: #f00;
-	text-decoration: none;
 }
 
 #statements *.content {
@@ -62,18 +53,7 @@
 	width: 130px;
 	padding: 5px 10px;
 	margin-right: -170px;
-}
-
-#statements *.total_score {
-	position: inline;
-	width: 20px;
-	margin-right: 10px;
-	padding: 3px 5px;
-	font-size: 11pt;
-	font-weight: bold;
-	vertical-align: top;
-	border: 1px solid #aaa;
-	background: red;
+	text-align: center;
 }
 
 #statements *.party {
@@ -109,10 +89,6 @@
 	text-decoration: none;
 }
 
-#statements h1 a:hover {
-	color: red;
-}
-
 #statements h1 a:visited {
 	color: black;
 }
@@ -136,6 +112,56 @@
 #statements img.perp_thumb {
 	width: 100px;
 	height: 125px;
+}
+
+#statements *.score {
+	margin: 10px;
+	text-align: center;
+	font-weight: bold;
+}
+
+#statements *.score.hypocrisy, *.score.hyperbole {
+	width: 30px;
+	height: 25px;
+	line-height: 25px;
+	margin: 10px;
+	border: #aaa outset 1px;
+	font-size: 12pt;
+}
+
+#statements *.score.hypocrisy {
+	float: left;
+}
+
+#statements *.score.hyperbole {
+	float: right;
+}
+
+#statements *.score.overall {
+	clear: both;
+	width: 50px;
+	height: 40px;
+	line-height: 40px;
+	margin-left: auto;
+	margin-right: auto;
+	border: #ccc double 3px;
+	font-size: 20pt;
+}
+
+#statements *.score.high {
+	background: #e55;
+}
+
+#statements *.score.mid {
+	background: yellow;
+}
+
+#statements *.score.low {
+	background: #4a4;
+}
+
+#statements *.score.none {
+	background: none;
 }
 
 

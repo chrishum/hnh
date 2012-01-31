@@ -1,6 +1,6 @@
 %li
   %span.name
-    = link_to "#{perp.first_name} #{perp.last_name}", perp
+    = link_to perp.full_name, perp
     = surround "(", ")" do
-      #{perp.party_three_letter}, #{pluralize(perp.statements.count, "statement")}
-  = delete_link perp, "You sure?", "Delete #{perp.first_name} #{perp.last_name}", " | "
+      #{perp.party_three_letter}, #{pluralize(perp.statements_count, "statement")}
+  = delete_link perp, "You sure?", "Delete #{perp.full_name}", " | "

@@ -11,7 +11,7 @@ describe PartiesController do
       third  = Factory(:party, :name => "Third")
       @parties = [first, second, third]
       30.times do
-        @parties << Factory(:party, :name => Factory.next(:name))
+        @parties << Factory(:party)
       end
     end
     

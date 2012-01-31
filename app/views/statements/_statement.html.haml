@@ -14,28 +14,6 @@
     %h2.perp_name= link_to statement.perp_name, perp_path(statement.perp_id)
     = image_tag statement.perp_thumb_url, :alt => statement.perp_name, :class => "perp_thumb"
   .details
-    %span.total_score= (rand * 100).ceil
-
--#
-  %tr{:height => "2em"}
-    %td.perp{:width => "120"}
-      = link_to statement.perp_name, perp_path(statement.perp_id)
-    %td.party
-      = statement.perp.party_name
-  %tr
-    %td.picture
-      %img{:src => "\#", :alt => "Perp Image", :height => "100", :width => "100"}
-    %td.statement
-      %span.content
-        = link_to "\"" + statement.content + "\"", perp_statement_path(statement.perp_id, statement.id)
-      %br/
-      %span.context
-        = statement.context
-  %tr
-    %td.details
-      %span.timestamp #{time_ago_in_words(statement.date)} ago.
-      - if current_user && current_user.admin?
-        %span.delete
-          = surround "(", ")" do
-            = link_to "delete", perp_statement_path(statement.perp_id, statement.id), :method => :delete, :confirm => "You sure?", :title => "Delete #{statement.perp}: #{statement.content}"
-    %td
+    .score.hypocrisy{:class => score_color_class(statement.hypocrisy_score)}= score_value(statement.hypocrisy_score)
+    .score.hyperbole{:class => score_color_class(statement.hyperbole_score)}= score_value(statement.hyperbole_score)
+    .score.overall{:class => score_color_class(statement.score)}= score_value(statement.score)

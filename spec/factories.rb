@@ -1,36 +1,45 @@
-Factory.define :user do |user|
-  user.handle                "Chris Humphreys"
-  user.email                 "chris.h@mail.com"
-  user.password              "foobar"
-  user.password_confirmation "foobar"
-  user.skip_session_maintenance true
-end
+FactoryGirl.define do
 
-Factory.define :party do |party|
-  party.name                 { Factory.next(:name) }
-  party.three_letter         "Ind"
-  party.one_letter           "I"
-end
+  factory :user do 
+    handle                "Chris Humphreys"
+    sequence(:email)      {|n| "chris.h.#{n}@mail.com"}
+    password              "foobar"
+    password_confirmation "foobar"
+    skip_session_maintenance true
+  end
 
-Factory.define :perp do |perp|
-  perp.first_name            "Example"
-  perp.last_name             "Perp"
-  perp.association :party
-end
+  factory :party do 
+    sequence(:name)    {|n| "Party #{n}"}
+    three_letter "Ind"
+    one_letter   "I"
+  end
 
-Factory.sequence :last_name do |n|
-  "Perp #{n}"
-end
+  factory :perp do
+    first_name            "Example"
+    sequence(:last_name) {|n| "Perp #{n}"}
+    association :party
+  end
 
-Factory.sequence :name do |n|
-  "Party #{n}"
-end
+  factory :statement do 
+    content          "Foo bar"
+    date             "2001-01-01"
+    context          "Context for the statement."
+    why_hypocritical "Reasons why the statement is hypocritical"
+    why_hyperbolical "Reasons why the statement is hyperbolical"
+    association :perp
+  end
 
-Factory.define :statement do |statement|
-  statement.content          "Foo bar"
-  statement.date             "2001-01-01"
-  statement.context          "Context for the statement."
-  statement.why_hypocritical "Reasons why the statement is hypocritical"
-  statement.why_hyperbolical "Reasons why the statement is hyperbolical"
-  statement.association :perp
+  factory :hypocrisy_rating do 
+    rating "56"
+    type   "HypocrisyRating"
+    association :user
+    association :statement
+  end
+
+  factory :hyperbole_rating do 
+    rating "56"
+    type   "HyperboleRating"
+    association :user
+    association :statement
+  end
 end

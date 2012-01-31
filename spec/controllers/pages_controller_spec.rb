@@ -30,9 +30,9 @@ describe PagesController do
         
       it "should have a list of the latest statements" do
         get 'home'
-        response.should have_selector("td", :content => @statements[0].content)
-        response.should have_selector("td", :content => @statements[1].content)
-        response.should have_selector("td", :content => @statements[2].content)
+        response.should have_selector("h1", :content => @statements[0].content)
+        response.should have_selector("h1", :content => @statements[1].content)
+        response.should have_selector("h1", :content => @statements[2].content)
       end
     end
   end

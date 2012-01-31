@@ -10,55 +10,58 @@ describe User do
       :password_confirmation => "foobar" 
       }
   end
-  
-  it "should create a new instance given valid attributes" do
-    User.create!(@attr)
-  end
-  
-  it "should require a name" do
-    no_name_user = User.new(@attr.merge(:handle => ""))
-    no_name_user.should_not be_valid
-  end
-  
-  it "should require an email address" do
-    no_email_user = User.new(@attr.merge(:email => ""))
-    no_email_user.should_not be_valid
-  end
-  
-  it "should reject names that are too long" do
-    long_name = "a" * 51
-    long_name_user = User.new(@attr.merge(:handle => long_name))
-    long_name_user.should_not be_valid
-  end
-  
-  it "should accept valid email addresses" do
-    addresses = %w[user@foo.com THE_USER@foo.bar.org first.last@foo.jp]
-    addresses.each do |address|
-      valid_email_user = User.new(@attr.merge(:email => address))
-      valid_email_user.should be_valid
+
+  describe "validations" do
+    
+    it "should create a new instance given valid attributes" do
+      User.create!(@attr)
     end
-  end
-  
-  it "should reject invalid email addresses" do
-    addresses = %w[user@foo,com user_at_foo.org example.user@foo.]
-    addresses.each do |address|
-      invalid_email_user = User.new(@attr.merge(:email => address))
-      invalid_email_user.should_not be_valid
+
+    it "should require a name" do
+      no_name_user = User.new(@attr.merge(:handle => ""))
+      no_name_user.should_not be_valid
     end
-  end
-  
-  it "should reject duplicate email addresses" do
-    # Put a user with given email address into the database.
-    User.create!(@attr)
-    user_with_duplicate_email = User.new(@attr)
-    user_with_duplicate_email.should_not be_valid
-  end
-  
-  it "should reject email addresses identical up to case" do
-    upcased_email = @attr[:email].upcase
-    User.create!(@attr.merge(:email => upcased_email))
-    user_with_duplicate_email = User.new(@attr)
-    user_with_duplicate_email.should_not be_valid
+
+    it "should require an email address" do
+      no_email_user = User.new(@attr.merge(:email => ""))
+      no_email_user.should_not be_valid
+    end
+
+    it "should reject names that are too long" do
+      long_name = "a" * 51
+      long_name_user = User.new(@attr.merge(:handle => long_name))
+      long_name_user.should_not be_valid
+    end
+
+    it "should accept valid email addresses" do
+      addresses = %w[user@foo.com THE_USER@foo.bar.org first.last@foo.jp]
+      addresses.each do |address|
+        valid_email_user = User.new(@attr.merge(:email => address))
+        valid_email_user.should be_valid
+      end
+    end
+
+    it "should reject invalid email addresses" do
+      addresses = %w[user@foo,com user_at_foo.org example.user@foo.]
+      addresses.each do |address|
+        invalid_email_user = User.new(@attr.merge(:email => address))
+        invalid_email_user.should_not be_valid
+      end
+    end
+
+    it "should reject duplicate email addresses" do
+      # Put a user with given email address into the database.
+      User.create!(@attr)
+      user_with_duplicate_email = User.new(@attr)
+      user_with_duplicate_email.should_not be_valid
+    end
+
+    it "should reject email addresses identical up to case" do
+      upcased_email = @attr[:email].upcase
+      User.create!(@attr.merge(:email => upcased_email))
+      user_with_duplicate_email = User.new(@attr)
+      user_with_duplicate_email.should_not be_valid
+    end
   end
   
   describe "Password validations" do
@@ -114,6 +117,31 @@ describe User do
       @user.should be_admin
     end
   end
+  
+  describe "ratings association" do
+    
+    before(:each) do
+      @user = User.create!(@attr)
+      @hypocrisy_ratings = [Factory(:hypocrisy_rating, :user => @user), Factory(:hypocrisy_rating, :user => @user)]
+      @hyperbole_ratings = [Factory(:hyperbole_rating, :user => @user)]
+    end
+
+    it "should respond to hypocrisy_ratings" do
+      @user.should respond_to(:hypocrisy_ratings)
+    end
+    
+    it "should have the correct hypocrisy_ratings_count" do
+      @user.reload.hypocrisy_ratings_count.should == @hypocrisy_ratings.count
+    end
+    
+    it "should respond to hyperbole_ratings" do
+      @user.should respond_to(:hyperbole_ratings)
+    end
+    
+    it "should have the correct hyperbole_ratings_count" do
+      @user.reload.hyperbole_ratings_count.should == @hyperbole_ratings.count
+    end
+  end    
 end
 # == Schema Information
 #

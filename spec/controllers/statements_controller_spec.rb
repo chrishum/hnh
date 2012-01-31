@@ -48,7 +48,7 @@ describe StatementsController do
     it "should have an element for each statement" do
       get :index
       @statements[0..2].each do |statement|
-        response.should have_selector("span", :content => statement.content)
+        response.should have_selector("h1", :content => statement.content)
       end
     end
     

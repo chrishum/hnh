@@ -11,7 +11,7 @@ describe PerpsController do
       third  = Factory(:perp, :first_name => "Third")
       @perps = [first, second, third]
       30.times do
-        @perps << Factory(:perp, :last_name => Factory.next(:last_name))
+        @perps << Factory(:perp)
       end
     end
     
@@ -88,8 +88,8 @@ describe PerpsController do
       st1 = Factory(:statement, :perp => @perp, :content => "I never inhaled.")
       st2 = Factory(:statement, :perp => @perp, :content => "Pork and beans are Stalinist!")
       get :show, :id => @perp
-      response.should have_selector("span.content", :content => st1.content)
-      response.should have_selector("span.content", :content => st2.content)
+      response.should have_selector("h1", :content => st1.content)
+      response.should have_selector("h1", :content => st2.content)
     end
   end
   

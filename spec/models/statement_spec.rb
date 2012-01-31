@@ -51,6 +51,103 @@ describe Statement do
       @statement.party_one_letter.should == @perp.party_one_letter
     end
   end
+
+  describe "ratings association" do
+    
+    before(:each) do
+      @statement = @perp.statements.create(@attr)
+    end
+
+    it "should respond to hypocrisy_ratings" do
+      @statement.should respond_to(:hypocrisy_ratings)
+    end
+    
+    it "should have the correct hypocrisy_ratings_count" do
+      @hypocrisy_ratings = []
+      2.times do
+        @hypocrisy_ratings << Factory(:hypocrisy_rating, :statement => @statement)
+      end
+      @statement.reload.hypocrisy_ratings_count.should == @hypocrisy_ratings.count
+    end
+    
+    it "should respond to hyperbole_ratings" do
+      @statement.should respond_to(:hyperbole_ratings)
+    end
+    
+    it "should have the correct hyperbole_ratings_count" do
+      @hyperbole_ratings = []
+      3.times do
+        @hyperbole_ratings << Factory(:hyperbole_rating, :statement => @statement)
+      end
+      @statement.reload.hyperbole_ratings_count.should == @hyperbole_ratings.count
+    end
+  end
+  
+  describe "ratings and scores" do
+    
+    before(:each) do
+      @statement = @perp.statements.create(@attr)
+    end
+    
+    describe "below the scoring threshold" do
+      
+      it "should not have a hypocrisy score" do
+        4.times do
+          Factory(:hypocrisy_rating, :statement => @statement)
+        end
+        @statement.hypocrisy_score.should be_nil
+      end
+
+      it "should not have a hyperbole score" do
+        4.times do
+          Factory(:hyperbole_rating, :statement => @statement)
+        end
+        @statement.hyperbole_score.should be_nil
+      end
+      
+      it "should not have a total score" do
+        4.times do
+          Factory(:hypocrisy_rating, :statement => @statement)
+          Factory(:hyperbole_rating, :statement => @statement)
+        end
+        @statement.score.should be_nil
+      end
+    end
+    
+    describe "above the scoring threshold" do
+      
+      it "should have the correct hypocrisy score" do
+        @hypocrisy_ratings = []
+        5.times do
+          @hypocrisy_ratings << Factory(:hypocrisy_rating, :statement => @statement, 
+                                                           :rating => (rand * 100).to_i)
+        end
+        @statement.hypocrisy_score.should == (@hypocrisy_ratings.collect(&:rating).sum.to_f / @hypocrisy_ratings.size).to_i
+      end
+
+      it "should have the correct hyperbole score" do
+        @hyperbole_ratings = []
+        5.times do
+          @hyperbole_ratings << Factory(:hyperbole_rating, :statement => @statement, 
+                                                           :rating => (rand * 100).to_i)
+        end
+        @statement.hyperbole_score.should == (@hyperbole_ratings.collect(&:rating).sum.to_f / @hyperbole_ratings.size).to_i
+      end
+      
+      it "should have the correct overall score" do
+        @hypocrisy_ratings = []
+        @hyperbole_ratings = []
+        5.times do
+          @hypocrisy_ratings << Factory(:hypocrisy_rating, :statement => @statement, 
+                                                           :rating => (rand * 100).to_i)
+          @hyperbole_ratings << Factory(:hyperbole_rating, :statement => @statement, 
+                                                           :rating => (rand * 100).to_i)
+        end
+        @statement.score.should == (((@hypocrisy_ratings.collect(&:rating).sum.to_f / @hypocrisy_ratings.size) + 
+                                     (@hyperbole_ratings.collect(&:rating).sum.to_f / @hyperbole_ratings.size)) / 2).to_i
+      end
+    end
+  end
   
   describe "validations" do
         
@@ -80,15 +177,20 @@ end
 #
 # Table name: statements
 #
-#  id               :integer         not null, primary key
-#  content          :string(255)
-#  perp_id          :integer
-#  date             :date
-#  primary_source   :string(255)
-#  context          :text
-#  why_hypocritical :text
-#  created_at       :datetime
-#  updated_at       :datetime
-#  why_hyperbolical :text
+#  id                      :integer         not null, primary key
+#  content                 :string(255)
+#  perp_id                 :integer
+#  date                    :date
+#  primary_source          :string(255)
+#  context                 :text
+#  why_hypocritical        :text
+#  created_at              :datetime
+#  updated_at              :datetime
+#  why_hyperbolical        :text
+#  hypocricy_score         :integer
+#  hyperbole_score         :integer
+#  score                   :integer
+#  hypocrisy_ratings_count :integer         default(0)
+#  hyperbole_ratings_count :integer         default(0)
 #
 

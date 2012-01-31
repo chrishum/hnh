@@ -67,6 +67,10 @@ describe Perp do
       @perp.should respond_to(:statements)
     end
     
+    it "should have the correct statements_count" do
+      @perp.reload.statements_count.should == 2
+    end
+    
     it "should have the right statements in the right order" do
       @perp.statements.should == [@st2, @st1]
     end
